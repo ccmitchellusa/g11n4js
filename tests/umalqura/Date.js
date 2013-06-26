@@ -1,14 +1,9 @@
-dojo.provide("g11n4js.calendars.tests.umalqura.Date");
-dojo.require("g11n4js.calendars.umalqura.Date");
-dojo.require("g11n4js.calendars.umalqura.locale");
-dojo.require("g11n4js.calendars.umalqura");
-dojo.require("g11n4js.calendars.islamic.Date");
-dojo.require("g11n4js.calendars.islamic.locale");
-dojo.require("g11n4js.calendars.islamic");
+define(["doh", "dojo/_base/array", "g11n4js/calendars/gregorian",
+	"g11n4js/calendars/umalqura","g11n4js/calendars/umalqura/Date",
+	"g11n4js/calendars/umalqura/locale", "dojo/date/locale"],
+	function(doh, arr, gregorian, umalqura, iDate, iLocale, locale){
 
-dojo.require("dojo.date");
-
-dojo.requireLocalization("dojo.cldr", "gregorian");
+		dojo.requireLocalization("dojo.cldr", "gregorian");
 dojo.requireLocalization("dojo.cldr", "islamic");
 
 tests.register("g11n4js.calendars.tests.umalqura.Date",
@@ -22,7 +17,7 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		    setUp: function () {
 		        var partLocaleList = ["ar", "en"];
 
-		        dojo.forEach(partLocaleList, function (locale) {
+		        arr.forEach(partLocaleList, function (locale) {
 		            dojo.requireLocalization("dojo.cldr", "islamic", locale);
 		        });
 		    },
@@ -49,12 +44,12 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 
 		        var idate1, idate2, gdate1, gdate2;
 		        var diff;
-		        idate1 = new g11n4js.calendars.umalqura.Date(1400, 0, 1);
+		        idate1 = new iDate(1400, 0, 1);
 		        gdate1 = new Date(1979, 10, 20);
-		        idate2 = new g11n4js.calendars.umalqura.Date();
+		        idate2 = new iDate();
 
 		        gdate2 = idate1.toGregorian();
-		        diff = dojo.date.compare(gdate1, gdate2, "date");
+		        diff = gregorian.compare(gdate1, gdate2, "date");
 		        t.is(diff, 0, "error in converting to Gregorian");
 
 		        idate2.fromGregorian(gdate1);
@@ -71,12 +66,12 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        {
 		            var idate1, idate2, gdate1, gdate2;
 		            var diff;
-		            idate1 = new g11n4js.calendars.umalqura.Date(1400, 0, 1);
+		            idate1 = new iDate(1400, 0, 1);
 		            gdate1 = new Date(1979, 10, 20);
-		            idate2 = new g11n4js.calendars.umalqura.Date();
+		            idate2 = new iDate();
 
 		            gdate2 = idate1.toGregorian();
-		            diff = dojo.date.compare(gdate1, gdate2, "date");
+		            diff = gregorian.compare(gdate1, gdate2, "date");
 
 		            idate2.fromGregorian(gdate1);
 
@@ -94,12 +89,12 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 
 		            var idate1, idate2, gdate1, gdate2;
 		            var diff;
-		            idate1 = new g11n4js.calendars.umalqura.Date(1400, 0, 2);
+		            idate1 = new iDate(1400, 0, 2);
 		            gdate1 = new Date(1979, 10, 21);
-		            idate2 = new g11n4js.calendars.umalqura.Date();
+		            idate2 = new iDate();
 
 		            gdate2 = idate1.toGregorian();
-		            diff = dojo.date.compare(gdate1, gdate2, "date");
+		            diff = gregorian.compare(gdate1, gdate2, "date");
 
 		            idate2.fromGregorian(gdate1);
 
@@ -116,12 +111,12 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        {
 		            var idate1, idate2, gdate1, gdate2;
 		            var diff;
-		            idate1 = new g11n4js.calendars.umalqura.Date(1405, 0, 1);
+		            idate1 = new iDate(1405, 0, 1);
 		            gdate1 = new Date(1984, 8, 26);
-		            idate2 = new g11n4js.calendars.umalqura.Date();
+		            idate2 = new iDate();
 
 		            gdate2 = idate1.toGregorian();
-		            diff = dojo.date.compare(gdate1, gdate2, "date");
+		            diff = gregorian.compare(gdate1, gdate2, "date");
 
 		            idate2.fromGregorian(gdate1);
 
@@ -138,12 +133,12 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        {
 		            var idate1, idate2, gdate1, gdate2;
 		            var diff;
-		            idate1 = new g11n4js.calendars.umalqura.Date(1410, 0, 1);
+		            idate1 = new iDate(1410, 0, 1);
 		            gdate1 = new Date(1989, 7, 3);
-		            idate2 = new g11n4js.calendars.umalqura.Date();
+		            idate2 = new iDate();
 
 		            gdate2 = idate1.toGregorian();
-		            diff = dojo.date.compare(gdate1, gdate2, "date");
+		            diff = gregorian.compare(gdate1, gdate2, "date");
 
 		            idate2.fromGregorian(gdate1);
 
@@ -160,12 +155,12 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        {
 		            var idate1, idate2, gdate1, gdate2;
 		            var diff;
-		            idate1 = new g11n4js.calendars.umalqura.Date(1400, 0, 1);
+		            idate1 = new iDate(1400, 0, 1);
 		            gdate1 = new Date(1979, 10, 20);
-		            idate2 = new g11n4js.calendars.umalqura.Date();
+		            idate2 = new iDate();
 
 		            gdate2 = idate1.toGregorian();
-		            diff = dojo.date.compare(gdate1, gdate2, "date");
+		            diff = gregorian.compare(gdate1, gdate2, "date");
 
 		            idate2.fromGregorian(gdate1);
 
@@ -178,10 +173,10 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
                                 [1400, 0, 1, 1979, 10, 20],
                                 [1400, 0, 2, 1979, 10, 21],
 		            ];
-		            dojo.forEach(dates, function (d, i) {
-		                idate1 = new g11n4js.calendars.umalqura.Date(d[0], d[1], d[2]);
+		            arr.forEach(dates, function (d, i) {
+		                idate1 = new iDate(d[0], d[1], d[2]);
 		                gdate1 = new Date(d[3], d[4], d[5]);
-		                idate2 = new g11n4js.calendars.umalqura.Date();
+		                idate2 = new iDate();
 		                idate2.fromGregorian(gdate1);
 		                var errMsg = "error in converting from Gregorian at Year : " + d[0] + " Month: " + d[1] + " Day: " + d[2];
 		                diff = idate1.getFullYear() - idate2.getFullYear();
@@ -198,12 +193,12 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        {
 		            var idate1, idate2, gdate1, gdate2;
 		            var diff;
-		            idate1 = new g11n4js.calendars.umalqura.Date(1405, 0, 2);
+		            idate1 = new iDate(1405, 0, 2);
 		            gdate1 = new Date(1984, 8, 27);
-		            idate2 = new g11n4js.calendars.umalqura.Date();
+		            idate2 = new iDate();
 
 		            gdate2 = idate1.toGregorian();
-		            diff = dojo.date.compare(gdate1, gdate2, "date");
+		            diff = gregorian.compare(gdate1, gdate2, "date");
 
 		            idate2.fromGregorian(gdate1);
 
@@ -220,12 +215,12 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        {
 		            var idate1, idate2, gdate1, gdate2;
 		            var diff;
-		            idate1 = new g11n4js.calendars.umalqura.Date(1410, 0, 2);
+		            idate1 = new iDate(1410, 0, 2);
 		            gdate1 = new Date(1989, 7, 4);
-		            idate2 = new g11n4js.calendars.umalqura.Date();
+		            idate2 = new iDate();
 
 		            gdate2 = idate1.toGregorian();
-		            diff = dojo.date.compare(gdate1, gdate2, "date");
+		            diff = gregorian.compare(gdate1, gdate2, "date");
 
 		            idate2.fromGregorian(gdate1);
 
@@ -242,12 +237,12 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        {
 		            var idate1, idate2, gdate1, gdate2;
 		            var diff;
-		            idate1 = new g11n4js.calendars.umalqura.Date(1415, 0, 2);
+		            idate1 = new iDate(1415, 0, 2);
 		            gdate1 = new Date(1994, 5, 11);
-		            idate2 = new g11n4js.calendars.umalqura.Date();
+		            idate2 = new iDate();
 
 		            gdate2 = idate1.toGregorian();
-		            diff = dojo.date.compare(gdate1, gdate2, "date");
+		            diff = gregorian.compare(gdate1, gdate2, "date");
 
 		            idate2.fromGregorian(gdate1);
 
@@ -265,12 +260,12 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 
 		            var idate1, idate2, gdate1, gdate2;
 		            var diff;
-		            idate1 = new g11n4js.calendars.umalqura.Date(1400, 2, 2);
+		            idate1 = new iDate(1400, 2, 2);
 		            gdate1 = new Date(1980, 0, 19);
-		            idate2 = new g11n4js.calendars.umalqura.Date();
+		            idate2 = new iDate();
 
 		            gdate2 = idate1.toGregorian();
-		            diff = dojo.date.compare(gdate1, gdate2, "date");
+		            diff = gregorian.compare(gdate1, gdate2, "date");
 		            t.is(diff, 0, "error in converting to Gregorian");
 		        }
 
@@ -278,11 +273,11 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        {
 		            var idate1, idate2, gdate1, gdate2;
 		            var diff;
-		            idate1 = new g11n4js.calendars.umalqura.Date(1400, 3, 1);
+		            idate1 = new iDate(1400, 3, 1);
 		            gdate1 = new Date(1980, 1, 16);
 
 		            gdate2 = idate1.toGregorian();
-		            diff = dojo.date.compare(gdate1, gdate2, "date");
+		            diff = gregorian.compare(gdate1, gdate2, "date");
 		            t.is(diff, 0, "error in converting to Gregorian");
 		        }
 		    }
@@ -292,9 +287,9 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		    name: "toGregorian",
 		    runTest: function (t) {
 
-		        var dateIslamic = new g11n4js.calendars.umalqura.Date(1431, 3, 6); // March 22 2010
+		        var dateIslamic = new iDate(1431, 3, 6); // March 22 2010
 		        var dateGregorian = dateIslamic.toGregorian();
-		        t.is(0, dojo.date.compare(new Date(2010, 2, 22), dateGregorian, "date"));
+		        t.is(0, gregorian.compare(new Date(2010, 2, 22), dateGregorian, "date"));
 		        var dates = [
 
 				           		[1400, 1, 1, 1979, 11, 19],
@@ -528,16 +523,16 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        var idate, gdate;
 		        var dateIslamic;
 		        var diff;
-		        dojo.forEach(dates, function (d, i) {
-		            idate = new g11n4js.calendars.umalqura.Date(d[0], d[1], d[2]);
+		        arr.forEach(dates, function (d, i) {
+		            idate = new iDate(d[0], d[1], d[2]);
 		            gdate = new Date(d[3], d[4], d[5]);
 
-		            t.is(0, dojo.date.compare(idate.toGregorian(), gdate, "date"));
+		            t.is(0, gregorian.compare(idate.toGregorian(), gdate, "date"));
 
-		            dateIslamic = new g11n4js.calendars.umalqura.Date();
+		            dateIslamic = new iDate();
 		            dateIslamic.fromGregorian(gdate);
 
-		            diff = g11n4js.calendars.umalqura.compare(dateIslamic, idate, "date");
+		            diff = umalqura.compare(dateIslamic, idate, "date");
 
 		            var errorMsg = "year: " + d[0] + " month: " + d[1] + " day: " + d[2] + ",";
 
@@ -556,14 +551,14 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		{
 		    name: "fromGregorian",
 		    runTest: function (t) {
-		        var dateIslamic = new g11n4js.calendars.umalqura.Date();
+		        var dateIslamic = new iDate();
 		        var dateGregorian = new Date(2010, 2, 22);
-		        var iDate, gDate;
+		        var uDate, gDate;
 		        dateIslamic.fromGregorian(dateGregorian);
-		        var inputDate = new g11n4js.calendars.umalqura.Date(1431, 3, 6);
-		        t.is(0, g11n4js.calendars.umalqura.compare(inputDate, dateIslamic, "date"));
+		        var inputDate = new iDate(1431, 3, 6);
+		        t.is(0, umalqura.compare(inputDate, dateIslamic, "date"));
 
-		        t.is(0, dojo.date.compare(new Date(2010, 2, 22), dateGregorian, "date"));
+		        t.is(0, gregorian.compare(new Date(2010, 2, 22), dateGregorian, "date"));
 		        var dates = [
 			 	         [1431, 3, 6, 2010, 2, 22],
 			 	         [1400, 0, 1, 1979, 10, 20],
@@ -1193,14 +1188,14 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        ];
 		        var idate, gdate, idate_expected;
 		        dateIslamic.fromGregorian(dateGregorian);
-		        var inputDate = new g11n4js.calendars.umalqura.Date(1431, 3, 6);
-		        t.is(0, g11n4js.calendars.umalqura.compare(inputDate, dateIslamic, "date"));
-		        dojo.forEach(dates, function (d, i) {
+		        var inputDate = new iDate(1431, 3, 6);
+		        t.is(0, umalqura.compare(inputDate, dateIslamic, "date"));
+		        arr.forEach(dates, function (d, i) {
 
-		            idate = new g11n4js.calendars.umalqura.Date();
-		            idate_expected = new g11n4js.calendars.umalqura.Date(d[0], d[1], d[2]);
+		            idate = new iDate();
+		            idate_expected = new iDate(d[0], d[1], d[2]);
 		            gdate = new Date(d[3], d[4], d[5]);
-		            idate = new g11n4js.calendars.umalqura.Date();
+		            idate = new iDate();
 		            idate.fromGregorian(gdate);
 		            var errorMsg = "error at date Year=" + d[0] + " month= " + d[1] + " day= " + d[2];
 
@@ -1208,7 +1203,7 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		            t.is(idate.getMonth(), d[1], errorMsg + " error at Month");
 		            t.is(idate.getDate(), d[2], errorMsg + " error at Day");
 
-		            t.is(0, dojo.date.compare(idate.fromGregorian(gdate), idate_expected, "date"), "year: " + d[0] + " month:" + d[1] + " day:" + d[2]);
+		            t.is(0, gregorian.compare(idate.fromGregorian(gdate), idate_expected, "date"), "year: " + d[0] + " month:" + d[1] + " day:" + d[2]);
 		        });
 
 		        //Special Case #2
@@ -1223,11 +1218,11 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		            gMonth = 10;
 		            gDay = 20;
 
-		            var dateIslamic = new g11n4js.calendars.umalqura.Date();
+		            var dateIslamic = new iDate();
 		            var dateGregorian = new Date(gYear, gMonth, gDay);
 		            var iDate, gDate;
 		            dateIslamic.fromGregorian(dateGregorian);
-		            var inputDate = new g11n4js.calendars.umalqura.Date(hYear, hMonth, hDay);
+		            var inputDate = new iDate(hYear, hMonth, hDay);
 
 		            t.is(inputDate.getFullYear(), hYear, "error in year");
 		            t.is(inputDate.getMonth(), hMonth, "error in month");
@@ -1236,7 +1231,7 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		            t.is(dateIslamic.getFullYear(), hYear, "error in conversion in year");
 		            t.is(dateIslamic.getMonth(), hMonth, "error in conversion in month");
 		            t.is(dateIslamic.getDate(), hDay, "error in conversion in Day");
-		            t.is(0, g11n4js.calendars.umalqura.compare(inputDate, dateIslamic, "date"));
+		            t.is(0, umalqura.compare(inputDate, dateIslamic, "date"));
 
 		        }
 		    }
@@ -1253,8 +1248,8 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 					[1431, 6, 22, 0],
 					[1431, 7, 15, 2]
 		        ];
-		        dojo.forEach(dateTable, function (d, i) {
-		            var date = new g11n4js.calendars.umalqura.Date(d[0], d[1], d[2]);
+		        arr.forEach(dateTable, function (d, i) {
+		            var date = new iDate(d[0], d[1], d[2]);
 		            var gday = date.getDay();
 		            t.is(d[3], gday);
 		        });
@@ -1269,9 +1264,9 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 					[1399, 11, 29]
 		        ];
 
-		        dojo.forEach(dateTable, function (d, i) {
-		            var date = new g11n4js.calendars.umalqura.Date(d[0], d[1], 1);
-		            t.is(d[2], g11n4js.calendars.umalqura.getDaysInMonth(date));
+		        arr.forEach(dateTable, function (d, i) {
+		            var date = new iDate(d[0], d[1], 1);
+		            t.is(d[2], umalqura.getDaysInMonth(date));
 		        });
 		    }
 		},
@@ -1294,9 +1289,9 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        var add = [24, 60, 12, -24, -24, 2, -2, 2, -3, 1, -1];
 
 		        var dateHijriStart, dateHijriEnd, res, dateHijriRes;
-		        dojo.forEach(start, function (s, i) {
-		            dateHijriStart = new g11n4js.calendars.umalqura.Date(s[0], s[1], 1);
-		            dateHijriRes = g11n4js.calendars.umalqura.add(dateHijriStart, "month", add[i]);
+		        arr.forEach(start, function (s, i) {
+		            dateHijriStart = new iDate(s[0], s[1], 1);
+		            dateHijriRes = umalqura.add(dateHijriStart, "month", add[i]);
 
 		            t.is(0, dateHijriRes.getMonth() - s[3]);
 		            t.is(0, dateHijriRes.getFullYear() - s[2]);
@@ -1322,10 +1317,10 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		    var add = [24, 60, 12, -24, -24, 2, -2, 2, -3, 1, -1];
 
 		    var dateHijriStart, dateHijriEnd, res, dateHijriRes;
-		    dojo.forEach(start, function (s, i) {
-		        dateHijriStart = new g11n4js.calendars.umalqura.Date(s[0], s[1], 1);
-		        dateHijriRes = new g11n4js.calendars.umalqura.Date(s[2], s[3], 1);
-		        t.is(g11n4js.calendars.umalqura.difference(dateHijriStart, dateHijriRes, "month"), add[i]);
+		    arr.forEach(start, function (s, i) {
+		        dateHijriStart = new iDate(s[0], s[1], 1);
+		        dateHijriRes = new iDate(s[2], s[3], 1);
+		        t.is(umalqura.difference(dateHijriStart, dateHijriRes, "month"), add[i]);
 		    });
 		}
 		},
@@ -2304,87 +2299,87 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        diffDay = 0;
 		        diffMonth = 0;
 		        diffYear = 0;
-		        dojo.forEach(dates, function (d, i) {
+		        arr.forEach(dates, function (d, i) {
 		            if (d[2] == 0) {
 		                d[2] = 1;
 		            }
 
-		            iDate = new g11n4js.calendars.umalqura.Date(d[0], d[1], d[2]);
-		            t.is(iDate.getFullYear(), d[0]);
-		            t.is(iDate.getDate(), d[2]);
-		            iDate2 = new g11n4js.calendars.umalqura.Date(0, 0, 0);
+		            uDate = new iDate(d[0], d[1], d[2]);
+		            t.is(uDate.getFullYear(), d[0]);
+		            t.is(uDate.getDate(), d[2]);
+		            iDate2 = new iDate(0, 0, 0);
 		            iDate2.setFullYear(d[0]);
 		            iDate2.setMonth(d[1]);
 		            iDate2.setDate(d[2]);
-		            diffDay = g11n4js.calendars.umalqura.difference(iDate, iDate2, "year");
-		            diffMonth = g11n4js.calendars.umalqura.difference(iDate, iDate2, "month");
-		            diffYear = g11n4js.calendars.umalqura.difference(iDate, iDate2, "day");
+		            diffDay = umalqura.difference(uDate, iDate2, "year");
+		            diffMonth = umalqura.difference(uDate, iDate2, "month");
+		            diffYear = umalqura.difference(uDate, iDate2, "day");
 		        });
 
 
 		        //Special Case #1
 		        {
-		            var iDate, iDate2, year, month, day;
+		            var uDate, iDate2, year, month, day;
 		            year = 1202;
 		            month = 1;
 		            day = 29;
 		            weekday = 1;
-		            iDate = new g11n4js.calendars.umalqura.Date(year, month, day);
-		            iDate.setFullYear(year);
-		            iDate.setMonth(month);
-		            iDate.setDate(day);
+		            uDate = new iDate(year, month, day);
+		            uDate.setFullYear(year);
+		            uDate.setMonth(month);
+		            uDate.setDate(day);
 
-		            t.is(year, iDate.getFullYear());
-		            t.is(month, iDate.getMonth());
-		            t.is(day, iDate.getDate());
+		            t.is(year, uDate.getFullYear());
+		            t.is(month, uDate.getMonth());
+		            t.is(day, uDate.getDate());
 		        }
 		        //Special Case #2
 		        {
-		            var iDate, iDate2, year, month, day;
+		            var uDate, iDate2, year, month, day;
 		            year = 1202;
 		            month = 1;
 		            day = 29;
 		            weekday = 1;
-		            iDate = new g11n4js.calendars.umalqura.Date(year, month, day);
-		            iDate.setFullYear(year);
-		            iDate.setMonth(month);
-		            iDate.setDate(day);
+		            uDate = new iDate(year, month, day);
+		            uDate.setFullYear(year);
+		            uDate.setMonth(month);
+		            uDate.setDate(day);
 
-		            t.is(year, iDate.getFullYear());
-		            t.is(month, iDate.getMonth());
-		            t.is(day, iDate.getDate());
+		            t.is(year, uDate.getFullYear());
+		            t.is(month, uDate.getMonth());
+		            t.is(day, uDate.getDate());
 		        }
 		        //Special Case #3
 		        {
-		            var iDate, iDate2, year, month, day;
+		            var uDate, iDate2, year, month, day;
 		            year = 1202;
 		            month = 1;
 		            day = 29;
 		            weekday = 1;
-		            iDate = new g11n4js.calendars.umalqura.Date(year, month, day);
-		            iDate.setFullYear(year);
-		            iDate.setMonth(month);
-		            iDate.setDate(day);
+		            uDate = new iDate(year, month, day);
+		            uDate.setFullYear(year);
+		            uDate.setMonth(month);
+		            uDate.setDate(day);
 
-		            t.is(year, iDate.getFullYear());
-		            t.is(month, iDate.getMonth());
-		            t.is(day, iDate.getDate());
+		            t.is(year, uDate.getFullYear());
+		            t.is(month, uDate.getMonth());
+		            t.is(day, uDate.getDate());
 		        }
 		        //Special Case #4
 		        {
-		            var iDate, iDate2, year, month, day;
+		            var uDate, iDate2, year, month, day;
 		            year = 1202;
 		            month = 1;
 		            day = 29;
 		            weekday = 1;
-		            iDate = new g11n4js.calendars.umalqura.Date(year, month, day);
-		            iDate.setFullYear(year);
-		            iDate.setMonth(month);
-		            iDate.setDate(day);
+		            uDate = new iDate(year, month, day);
+		            uDate.setFullYear(year);
+		            uDate.setMonth(month);
+		            uDate.setDate(day);
 
-		            t.is(year, iDate.getFullYear());
-		            t.is(month, iDate.getMonth());
-		            t.is(day, iDate.getDate());
+		            t.is(year, uDate.getFullYear());
+		            t.is(month, uDate.getMonth());
+		            t.is(day, uDate.getDate());
 		        }
 		    }
 		},
@@ -2399,16 +2394,16 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        var dateIslamicAdd2;
 		        var inputDates = [];
 		        var tmpDate1;
-		        tmpDate1 = new g11n4js.calendars.umalqura.Date(1420, 11, 30);
+		        tmpDate1 = new iDate(1420, 11, 30);
 
-		        var tmpDate2 = new g11n4js.calendars.umalqura.Date(1421, 0, 1);
-		        var tmpDateDiff = g11n4js.calendars.umalqura.difference(tmpDate1, tmpDate2, "day");
+		        var tmpDate2 = new iDate(1421, 0, 1);
+		        var tmpDateDiff = umalqura.difference(tmpDate1, tmpDate2, "day");
 
-		        dateIslamic = new g11n4js.calendars.umalqura.Date(1480, 11, 30);
+		        dateIslamic = new iDate(1480, 11, 30);
 		        dateIslamic = tmpDate1;
-		        dateIslamicAdd = g11n4js.calendars.umalqura.add(dateIslamic, "day", 0);
-		        dateDiff = g11n4js.calendars.umalqura.difference(dateIslamicAdd, dateIslamic, "day");
-		        var dateDiff2 = g11n4js.calendars.umalqura.difference(dateIslamic, dateIslamic, "day");
+		        dateIslamicAdd = umalqura.add(dateIslamic, "day", 0);
+		        dateDiff = umalqura.difference(dateIslamicAdd, dateIslamic, "day");
+		        var dateDiff2 = umalqura.difference(dateIslamic, dateIslamic, "day");
 		        var amouts = [-1, 0, 1, 2, 5, 6, 7, 8, 12, 18, 20, 24, 50, -3, -4, -5, -6, -7, -8, -9, -10,
 				              -50, 200, -200];
 		        var units = [
@@ -2421,31 +2416,31 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 				           "second",
 				           "millisecond"
 		        ];
-		        dojo.forEach(inputDates, function (inDate, i) {
-		            dojo.forEach(amouts, function (amount, j) {
-		                dojo.forEach(units, function (unit, k) {
-		                    dateIslamic = new g11n4js.calendars.umalqura.Date(inDate[0], inDate[1], inDate[2]);
-		                    dateIslamicAdd = g11n4js.calendars.umalqura.add(dateIslamic, unit, amount);
-		                    dateDiff = g11n4js.calendars.umalqura.difference(dateIslamicAdd, dateIslamic, unit);
+		        arr.forEach(inputDates, function (inDate, i) {
+		            arr.forEach(amouts, function (amount, j) {
+		                arr.forEach(units, function (unit, k) {
+		                    dateIslamic = new iDate(inDate[0], inDate[1], inDate[2]);
+		                    dateIslamicAdd = umalqura.add(dateIslamic, unit, amount);
+		                    dateDiff = umalqura.difference(dateIslamicAdd, dateIslamic, unit);
 		                    t.is(dateDiff, amount);
 		                });
 
-		                dateIslamic = new g11n4js.calendars.umalqura.Date(inDate[0], inDate[1], inDate[2]);
+		                dateIslamic = new iDate(inDate[0], inDate[1], inDate[2]);
 
-		                dateIslamicAdd = g11n4js.calendars.umalqura.add(dateIslamic, "month", amount);
-		                dateDiff = g11n4js.calendars.umalqura.difference(dateIslamicAdd, dateIslamic, "month");
+		                dateIslamicAdd = umalqura.add(dateIslamic, "month", amount);
+		                dateDiff = umalqura.difference(dateIslamicAdd, dateIslamic, "month");
 		                t.is(dateDiff, amount);
 
-		                dateIslamicAdd = g11n4js.calendars.umalqura.add(dateIslamic, "year", amount);
-		                dateDiff = g11n4js.calendars.umalqura.difference(dateIslamicAdd, dateIslamic, "year");
+		                dateIslamicAdd = umalqura.add(dateIslamic, "year", amount);
+		                dateDiff = umalqura.difference(dateIslamicAdd, dateIslamic, "year");
 		                t.is(dateDiff, amount);
 
-		                dateIslamicAdd = g11n4js.calendars.umalqura.add(dateIslamic, "day", amount);
-		                dateDiff = g11n4js.calendars.umalqura.difference(dateIslamicAdd, dateIslamic, "day");
+		                dateIslamicAdd = umalqura.add(dateIslamic, "day", amount);
+		                dateDiff = umalqura.difference(dateIslamicAdd, dateIslamic, "day");
 		                t.is(dateDiff, amount);
 
-		                dateIslamicAdd = g11n4js.calendars.umalqura.add(dateIslamic, "weekday", amount);
-		                dateDiff = g11n4js.calendars.umalqura.difference(dateIslamicAdd, dateIslamic, "weekday");
+		                dateIslamicAdd = umalqura.add(dateIslamic, "weekday", amount);
+		                dateDiff = umalqura.difference(dateIslamicAdd, dateIslamic, "weekday");
 		                t.is(dateDiff, amount);
 		            });
 		        });
@@ -2456,10 +2451,10 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        var year = 1480 + x;
 		        var day1 = 3;
 		        var day2 = 4;
-		        var tmpDate1 = new g11n4js.calendars.umalqura.Date(year, month, 3);
-		        var tmpDate2 = new g11n4js.calendars.umalqura.Date(year, month, 4);
+		        var tmpDate1 = new iDate(year, month, 3);
+		        var tmpDate2 = new iDate(year, month, 4);
 
-		        var tmpDateDiff = g11n4js.calendars.umalqura.difference(tmpDate1, tmpDate2, "day");
+		        var tmpDateDiff = umalqura.difference(tmpDate1, tmpDate2, "day");
 		        t.is(tmpDate2.getFullYear(), year);
 		        t.is(tmpDate2.getMonth(), month);
 		    }
@@ -2474,7 +2469,7 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        var year = 1480 + x;
 		        var day1 = 3;
 		        var day2 = 4;
-		        var tmpDate2 = new g11n4js.calendars.umalqura.Date(year, month, day2);
+		        var tmpDate2 = new iDate(year, month, day2);
 
 		        t.is(tmpDate2.getFullYear(), year);
 		        t.is(tmpDate2.getMonth(), month);
@@ -2642,8 +2637,8 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
                         [1499, 3, 13]
 		        ];
 		        var currentDate;
-		        dojo.forEach(dates, function (cDate, i) {
-		            currentDate = new g11n4js.calendars.umalqura.Date(cDate[0], cDate[1], cDate[2]);
+		        arr.forEach(dates, function (cDate, i) {
+		            currentDate = new iDate(cDate[0], cDate[1], cDate[2]);
 		            t.is(currentDate.getFullYear(), cDate[0]);
 		            t.is(currentDate.getMonth(), cDate[1]);
 		            t.is(currentDate.getDate(), cDate[2]);
@@ -2654,7 +2649,7 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		{
 		    name: "getMonth_setMonth",
 		    runTest: function (t) {
-		        var dateIslamic = new g11n4js.calendars.umalqura.Date(1420, 1, 1);
+		        var dateIslamic = new iDate(1420, 1, 1);
 		        for (var year = 1420; year < 1430; year++) {
 		            dateIslamic.setFullYear(year);
 		            t.is(year, dateIslamic.getFullYear());
@@ -2680,40 +2675,41 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        ];
 
 		        var dateIslamic, dateIslamic1;
-		        dojo.forEach(dates, function (date, i) {
-		            dateIslamic = new g11n4js.calendars.umalqura.Date(date[0], date[1], date[2]);
+		        arr.forEach(dates, function (date, i) {
+		            dateIslamic = new iDate(date[0], date[1], date[2]);
 
 		            var options = [{ formatLength: 'full', locale: 'ar' }, { formatLength: 'long', locale: 'ar' }, { formatLength: 'medium', locale: 'ar' }, { formatLength: 'short', locale: 'ar' },
 						{ formatLength: 'full', locale: 'en' }, { formatLength: 'long', locale: 'en' }, { formatLength: 'medium', locale: 'en' }, { formatLength: 'short', locale: 'en' }];
-		            dojo.forEach(options, function (opt, i) {
-		                str = g11n4js.calendars.umalqura.locale.format(dateIslamic, opt);
+		            arr.forEach(options, function (opt, i) {
+		                str = iLocale.format(dateIslamic, opt);
 		                var option = "{" + opt + ", locale:'ar'}";
-		                dateIslamic1 = g11n4js.calendars.umalqura.locale.parse(str, opt);
-		                t.is(0, dojo.date.compare(dateIslamic.toGregorian(), dateIslamic1.toGregorian(), 'date'));
+		                dateIslamic1 = iLocale.parse(str, opt);
+		                t.is(0, gregorian.compare(dateIslamic.toGregorian(), dateIslamic1.toGregorian(), 'date'));
 		            });
 
 		            var pattern = ['d M yy', 'dd/MM/yy h:m:s', 'dd#MM#yy HH$mm$ss', 'dd MMMM yyyy'];
-		            dojo.forEach(pattern, function (pat, i) {
+		            arr.forEach(pattern, function (pat, i) {
 		                options = { datePattern: pat, selector: 'date', locale: 'ar' };
-		                str = g11n4js.calendars.umalqura.locale.format(dateIslamic, options);
-		                dateIslamic1 = g11n4js.calendars.umalqura.locale.parse(str, options);
-		                t.is(0, dojo.date.compare(dateIslamic.toGregorian(), dateIslamic1.toGregorian(), 'date'));
+		                str = iLocale.format(dateIslamic, options);
+		                dateIslamic1 = iLocale.parse(str, options);
+		                t.is(0, gregorian.compare(dateIslamic.toGregorian(), dateIslamic1.toGregorian(), 'date'));
 		            });
 		        });
 
-		        dateIslamic = new g11n4js.calendars.umalqura.Date(1431, 6, 3, 15, 3, 59);
+		        dateIslamic = new iDate(1431, 6, 3, 15, 3, 59);
 		        pattern = 'HH$mm$ss';
 		        options = { timePattern: pattern, selector: 'time' };
-		        str = g11n4js.calendars.umalqura.locale.format(dateIslamic, options);
-		        dateIslamic1 = g11n4js.calendars.umalqura.locale.parse(str, options);
-		        var gregDate = dojo.date.locale.parse(str, options);
-		        t.is(0, dojo.date.compare(gregDate, dateIslamic1.toGregorian(), 'time'));
+		        str = iLocale.format(dateIslamic, options);
+		        dateIslamic1 = iLocale.parse(str, options);
+		        var gregDate = gregorian.locale.parse(str, options);
+		        t.is(0, gregorian.compare(gregDate, dateIslamic1.toGregorian(), 'time'));
 
 		        pattern = "h:m:s";
 		        options = { timePattern: pattern, selector: 'time' };
-		        str = g11n4js.calendars.umalqura.locale.format(dateIslamic, options);
+		        str = iLocale.format(dateIslamic, options);
 		        t.is(str, "3:3:59");
 		    }
 		},
 	]
 );
+	});

@@ -1,8 +1,8 @@
 
 define(["doh", "dojo/_base/array", "g11n4js/calendars/gregorian",
 	"g11n4js/calendars/hebrew","g11n4js/calendars/hebrew/Date",
-	"g11n4js/calendars/hebrew/locale", "dojo/date/locale"],
-	function(doh, arr, gregorian, hebrew, hDate, hLocale, locale){
+	"g11n4js/calendars/hebrew/locale", "g11n4js/calendars/hebrew/numerals", "dojo/date/locale"],
+	function(doh, arr, gregorian, hebrew, hDate, hLocale, numerals, locale){
 
 dojo.requireLocalization("dojo.cldr", "gregorian");
 dojo.requireLocalization("dojo.cldr", "hebrew");
@@ -92,9 +92,6 @@ doh.register("g11n4js.calendars.tests.hebrew.Date",
 					[2038, 12, 9, 5799, KISLEV, 12],
 					[2094, 8, 17, 5854, ELUL, 5]
 				];
-
-				debugger;
-
 
 
 				var dateHebrew, dateGregorian;
@@ -348,20 +345,20 @@ doh.register("g11n4js.calendars.tests.hebrew.Date",
 				var i, hebrNum;
 				for ( i = 1 ; i <= 30; i++){
 					//test day hebrew numerals
-					t.is(hebrew.numerals.parseDayHebrewLetters(hebrew.numerals.getDayHebrewLetters(i)), i);
-					t.is(hebrew.numerals.parseDayHebrewLetters(hebrew.numerals.getDayHebrewLetters(i, true)), i); //with geresh
+					t.is(numerals.parseDayHebrewLetters(numerals.getDayHebrewLetters(i)), i);
+					t.is(numerals.parseDayHebrewLetters(numerals.getDayHebrewLetters(i, true)), i); //with geresh
 					//test month hebrew numerals
 					if ( i <= 13){
-						t.is(hebrew.numerals.parseMonthHebrewLetters(hebrew.numerals.getMonthHebrewLetters(i-1)), i-1);
+						t.is(numerals.parseMonthHebrewLetters(numerals.getMonthHebrewLetters(i-1)), i-1);
 					}
 				}
 				//test year hebrew numerals
 				for ( i = 5001; i < 6000; i+=27){
-					t.is(hebrew.numerals.parseYearHebrewLetters(hebrew.numerals.getYearHebrewLetters(i)), i);
+					t.is(numerals.parseYearHebrewLetters(numerals.getYearHebrewLetters(i)), i);
 				}
 				//hebrew numerals are not relevant for year < 5001 or > 5999
-				t.assertFalse (hebrew.numerals.parseYearHebrewLetters(hebrew.numerals.getYearHebrewLetters(2345)) == 2345);
-				t.assertFalse (hebrew.numerals.parseYearHebrewLetters(hebrew.numerals.getYearHebrewLetters(6789)) == 6789);
+				t.assertFalse (numerals.parseYearHebrewLetters(numerals.getYearHebrewLetters(2345)) == 2345);
+				t.assertFalse (numerals.parseYearHebrewLetters(numerals.getYearHebrewLetters(6789)) == 6789);
 			}
 		},
 		{

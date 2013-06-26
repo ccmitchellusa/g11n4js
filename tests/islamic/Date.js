@@ -1,14 +1,12 @@
-dojo.provide("g11n4js.calendars.tests.islamic.Date");
-dojo.require("g11n4js.calendars.islamic.Date");
-dojo.require("g11n4js.calendars.islamic.locale");
-dojo.require("g11n4js.calendars.islamic");
-dojo.require("dojo.date");
-dojo.require("dojo.date.locale");
+define(["doh", "dojo/_base/array", "g11n4js/calendars/gregorian",
+	"g11n4js/calendars/islamic","g11n4js/calendars/islamic/Date",
+	"g11n4js/calendars/islamic/locale", "dojo/date/locale"],
+	function(doh, arr, gregorian, islamic, iDate, iLocale, locale){
 
-dojo.requireLocalization("dojo.cldr", "gregorian");
+		dojo.requireLocalization("dojo.cldr", "gregorian");
 dojo.requireLocalization("dojo.cldr", "islamic");
 
-tests.register("g11n4js.calendars.tests.islamic.Date",
+doh.register("g11n4js.calendars.tests.islamic.Date",
 	[
 		{
 			// Test formatting and parsing of dates in various locales pre-built in dojo.cldr
@@ -19,7 +17,7 @@ tests.register("g11n4js.calendars.tests.islamic.Date",
 			setUp: function() {
 				var partLocaleList = ["ar","en"];
 
-				dojo.forEach(partLocaleList, function(locale) {
+				arr.forEach(partLocaleList, function(locale) {
 					dojo.requireLocalization("dojo.cldr", "islamic", locale);
 				});
 			},
@@ -903,14 +901,14 @@ tests.register("g11n4js.calendars.tests.islamic.Date",
 			
 			var idate,gdate;
 			
-			dojo.forEach(dateTable, function(d, i) {
+			arr.forEach(dateTable, function(d, i) {
 				
 					console.debug(d, "at index", i);
 				
-					idate = new g11n4js.calendars.islamic.Date(d[0],d[1],d[2], 15, 15, 10);
+					idate = new iDate(d[0],d[1],d[2], 15, 15, 10);
 					gdate = idate.toGregorian();
 					
-					t.is(0, dojo.date.compare(new Date(d[3], d[4], d[5], 15, 15, 10), gdate, "date"));
+					t.is(0, gregorian.compare(new Date(d[3], d[4], d[5], 15, 15, 10), gdate, "date"));
 				});
 
 			}
@@ -1837,17 +1835,17 @@ tests.register("g11n4js.calendars.tests.islamic.Date",
 				
 				var idate, gdate;
 				
-				dojo.forEach(dateTable, function(d, i) {
+				arr.forEach(dateTable, function(d, i) {
 					
 					//console.debug(d, "at index", i);
 				
 					gdate = new Date(d[0],d[1],d[2],15,15,10);
 					
-					idate = new g11n4js.calendars.islamic.Date();
+					idate = new iDate();
 					idate.fromGregorian(gdate);
 					
 					
-					t.is(0, g11n4js.calendars.islamic.compare(new g11n4js.calendars.islamic.Date(d[3], d[4], d[5], 15, 15, 10), idate, "date"));
+					t.is(0, islamic.compare(new iDate(d[3], d[4], d[5], 15, 15, 10), idate, "date"));
 				});
 			}
 		},
@@ -1870,8 +1868,8 @@ tests.register("g11n4js.calendars.tests.islamic.Date",
 			        [1202,1,20,5]
 								
 				];
-				dojo.forEach(dateTable, function(d, i) {
-					var date = new g11n4js.calendars.islamic.Date(d[0], d[1], d[2]);
+				arr.forEach(dateTable, function(d, i) {
+					var date = new iDate(d[0], d[1], d[2]);
 					t.is(d[3], date.getDay());
 				});
 
@@ -1890,9 +1888,9 @@ tests.register("g11n4js.calendars.tests.islamic.Date",
 					[1431, 2, 30]
 				];
 
-				dojo.forEach(dateTable, function(d, i) {
-					var date = new g11n4js.calendars.islamic.Date(d[0], d[1], 1);
-					t.is(d[2], g11n4js.calendars.islamic.getDaysInMonth(date));
+				arr.forEach(dateTable, function(d, i) {
+					var date = new iDate(d[0], d[1], 1);
+					t.is(d[2], islamic.getDaysInMonth(date));
 				});
 			}
 		},
@@ -1922,69 +1920,69 @@ tests.register("g11n4js.calendars.tests.islamic.Date",
 				var add = [24, 60, 12, -24, -24, 2, -2, 2, -3, 1, -1, 4, 4, -6, -1, -1, -1, -2];
 
 				var dateHijriStart, dateHijriEnd, res, dateHijriRes;
-				dojo.forEach(start, function(s, i) {
-					dateHijriStart = new g11n4js.calendars.islamic.Date(s[0], s[1], 1);
-					dateHijriRes = g11n4js.calendars.islamic.add(dateHijriStart, "month", add[i]);
+				arr.forEach(start, function(s, i) {
+					dateHijriStart = new iDate(s[0], s[1], 1);
+					dateHijriRes = islamic.add(dateHijriStart, "month", add[i]);
 
 					t.is(0, dateHijriRes.getMonth() - s[3]);
 					t.is(0, dateHijriRes.getFullYear() - s[2]);
 				});
 
 				//month difference
-				dojo.forEach(start, function(s, i) {
-					dateHijriRes = new g11n4js.calendars.islamic.Date(s[2], s[3], 1);
-					dateHijriStart = new g11n4js.calendars.islamic.Date(s[0], s[1], 1);
-					t.is(add[i], g11n4js.calendars.islamic.difference(dateHijriStart, dateHijriRes, "month"));
+				arr.forEach(start, function(s, i) {
+					dateHijriRes = new iDate(s[2], s[3], 1);
+					dateHijriStart = new iDate(s[0], s[1], 1);
+					t.is(add[i], islamic.difference(dateHijriStart, dateHijriRes, "month"));
 				});
 			}
 		},
 		{
 			name: "consistency_of_add_and_difference",
 			runTest: function(t) {
-				var dateIslamic = new g11n4js.calendars.islamic.Date(1431, 4, 6);
+				var dateIslamic = new iDate(1431, 4, 6);
 
 
 				var amouts = [2, 5, 6, 7, 8, 12, 18, 20, 24, 50, -3, -4, -5, -6, -7, -8, -9, -10, -50, 200, -200, 29, -29, 1, -1,
 				              23, 25];
 				var dateIslamicAdd;
 
-				dojo.forEach(amouts, function(amount, i) {
-					dateIslamicAdd = g11n4js.calendars.islamic.add(dateIslamic, "month", amount);
-					t.is(g11n4js.calendars.islamic.difference(dateIslamic, dateIslamicAdd, "month"), amount);
+				arr.forEach(amouts, function(amount, i) {
+					dateIslamicAdd = islamic.add(dateIslamic, "month", amount);
+					t.is(islamic.difference(dateIslamic, dateIslamicAdd, "month"), amount);
 
-					dateIslamicAdd = g11n4js.calendars.islamic.add(dateIslamic, "year", amount);
-					t.is(amount, g11n4js.calendars.islamic.difference(dateIslamic, dateIslamicAdd, "year"));
+					dateIslamicAdd = islamic.add(dateIslamic, "year", amount);
+					t.is(amount, islamic.difference(dateIslamic, dateIslamicAdd, "year"));
 
-					dateIslamicAdd = g11n4js.calendars.islamic.add(dateIslamic, "week", amount);
-					t.is(amount, g11n4js.calendars.islamic.difference(dateIslamic, dateIslamicAdd, "week"));
+					dateIslamicAdd = islamic.add(dateIslamic, "week", amount);
+					t.is(amount, islamic.difference(dateIslamic, dateIslamicAdd, "week"));
 
-					dateIslamicAdd = g11n4js.calendars.islamic.add(dateIslamic, "weekday", amount);
-					t.is(amount, g11n4js.calendars.islamic.difference(dateIslamic, dateIslamicAdd, "weekday"));
+					dateIslamicAdd = islamic.add(dateIslamic, "weekday", amount);
+					t.is(amount, islamic.difference(dateIslamic, dateIslamicAdd, "weekday"));
 
-					dateIslamicAdd = g11n4js.calendars.islamic.add(dateIslamic, "day", amount)
-					t.is(amount, g11n4js.calendars.islamic.difference(dateIslamic, dateIslamicAdd, "day"));
+					dateIslamicAdd = islamic.add(dateIslamic, "day", amount)
+					t.is(amount, islamic.difference(dateIslamic, dateIslamicAdd, "day"));
 			 
-					dateIslamicAdd = g11n4js.calendars.islamic.add(dateIslamic, "hour", amount);
-					t.is(amount, g11n4js.calendars.islamic.difference(dateIslamic, dateIslamicAdd, "hour"));
+					dateIslamicAdd = islamic.add(dateIslamic, "hour", amount);
+					t.is(amount, islamic.difference(dateIslamic, dateIslamicAdd, "hour"));
 
-					dateIslamicAdd = g11n4js.calendars.islamic.add(dateIslamic, "minute", amount);
-					t.is(amount, g11n4js.calendars.islamic.difference(dateIslamic, dateIslamicAdd, "minute"));
+					dateIslamicAdd = islamic.add(dateIslamic, "minute", amount);
+					t.is(amount, islamic.difference(dateIslamic, dateIslamicAdd, "minute"));
 
-					dateIslamicAdd = g11n4js.calendars.islamic.add(dateIslamic, "second", amount);
-					t.is(amount, g11n4js.calendars.islamic.difference(dateIslamic, dateIslamicAdd, "second"));
+					dateIslamicAdd = islamic.add(dateIslamic, "second", amount);
+					t.is(amount, islamic.difference(dateIslamic, dateIslamicAdd, "second"));
 
-					dateIslamicAdd = g11n4js.calendars.islamic.add(dateIslamic, "millisecond", amount);
-					t.is(amount, g11n4js.calendars.islamic.difference(dateIslamic, dateIslamicAdd, "millisecond"));
+					dateIslamicAdd = islamic.add(dateIslamic, "millisecond", amount);
+					t.is(amount, islamic.difference(dateIslamic, dateIslamicAdd, "millisecond"));
 				});
 
-				var dateIslamicDiff = new g11n4js.calendars.islamic.Date(1431, 4, 7);
-				t.is(1, g11n4js.calendars.islamic.difference(dateIslamic, dateIslamicDiff));
+				var dateIslamicDiff = new iDate(1431, 4, 7);
+				t.is(1, islamic.difference(dateIslamic, dateIslamicDiff));
 			}
 		},
 		{
 			name: "getMonth_setMonth",
 			runTest: function(t) {
-				var dateIslamic = new g11n4js.calendars.islamic.Date(1420, 1, 1);
+				var dateIslamic = new iDate(1420, 1, 1);
 				for (var year = 1420; year < 1430; year++) {
 					dateIslamic.setFullYear(year);
 					t.is(year, dateIslamic.getFullYear());
@@ -2011,38 +2009,38 @@ tests.register("g11n4js.calendars.tests.islamic.Date",
 						];
 
 				var dateIslamic, dateIslamic1;
-				dojo.forEach(dates, function(date, i) {
-					dateIslamic = new g11n4js.calendars.islamic.Date(date[0], date[1], date[2]);
+				arr.forEach(dates, function(date, i) {
+					dateIslamic = new iDate(date[0], date[1], date[2]);
 
 					var options = [{ formatLength: 'full', locale: 'ar' }, { formatLength: 'long', locale: 'ar' }, { formatLength: 'medium', locale: 'ar' }, { formatLength: 'short', locale: 'ar' },
 						{ formatLength: 'full', locale: 'en' }, { formatLength: 'long', locale: 'en' }, { formatLength: 'medium', locale: 'en' }, { formatLength: 'short', locale: 'en'}];
-					dojo.forEach(options, function(opt, i) {
-						str = g11n4js.calendars.islamic.locale.format(dateIslamic, opt);
+					arr.forEach(options, function(opt, i) {
+						str = iLocale.format(dateIslamic, opt);
 						var option = "{" + opt + ", locale:'ar'}";
-						dateIslamic1 = g11n4js.calendars.islamic.locale.parse(str, opt);
-						t.is(0, dojo.date.compare(dateIslamic.toGregorian(), dateIslamic1.toGregorian(), 'date'));
+						dateIslamic1 = iLocale.parse(str, opt);
+						t.is(0, gregorian.compare(dateIslamic.toGregorian(), dateIslamic1.toGregorian(), 'date'));
 					});
 
 					var pattern = ['d M yy', 'dd/MM/yy h:m:s', 'dd#MM#yy HH$mm$ss', 'dd MMMM yyyy'];
-					dojo.forEach(pattern, function(pat, i) {
+					arr.forEach(pattern, function(pat, i) {
 						options = { datePattern: pat, selector: 'date', locale: 'ar' };
-						str = g11n4js.calendars.islamic.locale.format(dateIslamic, options);
-						dateIslamic1 = g11n4js.calendars.islamic.locale.parse(str, options);
-						t.is(0, dojo.date.compare(dateIslamic.toGregorian(), dateIslamic1.toGregorian(), 'date'));
+						str = iLocale.format(dateIslamic, options);
+						dateIslamic1 = iLocale.parse(str, options);
+						t.is(0, gregorian.compare(dateIslamic.toGregorian(), dateIslamic1.toGregorian(), 'date'));
 					});
 				});
 
-				dateIslamic = new g11n4js.calendars.islamic.Date(1431, 6, 3, 15, 3, 59);
+				dateIslamic = new iDate(1431, 6, 3, 15, 3, 59);
 				pattern = 'HH$mm$ss';
 				options = { timePattern: pattern, selector: 'time' };
-				str = g11n4js.calendars.islamic.locale.format(dateIslamic, options);
-				dateIslamic1 = g11n4js.calendars.islamic.locale.parse(str, options);
-				var gregDate = dojo.date.locale.parse(str, options);
-				t.is(0, dojo.date.compare(gregDate, dateIslamic1.toGregorian(), 'time'));
+				str = iLocale.format(dateIslamic, options);
+				dateIslamic1 = iLocale.parse(str, options);
+				var gregDate = gregorian.locale.parse(str, options);
+				t.is(0, gregorian.compare(gregDate, dateIslamic1.toGregorian(), 'time'));
 
 				pattern = "h:m:s";
 				options = { timePattern: pattern, selector: 'time' };
-				str = g11n4js.calendars.islamic.locale.format(dateIslamic, options);
+				str = iLocale.format(dateIslamic, options);
 				t.is(str, "3:3:59");
 			}
 		},
@@ -2070,36 +2068,36 @@ tests.register("g11n4js.calendars.tests.islamic.Date",
 				};
 						
 				var dateIslamic, date2;
-				dojo.forEach(islamicDates, function(date, i){
-					dateIslamic = new g11n4js.calendars.islamic.Date(date[0], date[1], date[2], date[3], date[4]);
+				arr.forEach(islamicDates, function(date, i){
+					dateIslamic = new iDate(date[0], date[1], date[2], date[3], date[4]);
 					date2 = new Date(dates[i][0], dates[i][1], dates[i][2], dates[i][3], dates[i][4]);			
 		
-					var newIslamicDate = g11n4js.calendars.islamic.add(dateIslamic, "millisecond",  1200);
-					var newDate = dojo.date.add(date2, "millisecond",  1200);
+					var newIslamicDate = islamic.add(dateIslamic, "millisecond",  1200);
+					var newDate = gregorian.add(date2, "millisecond",  1200);
 					t.is(newIslamicDate.getHours(), newDate.getHours(), "Hours are different");
 					t.is(newIslamicDate.getMinutes(), newDate.getMinutes(), "Minutes are different");
 					t.is(newIslamicDate.getSeconds(), newDate.getSeconds(), "Seconds are different");
 					t.is(newIslamicDate.getMilliseconds(), newDate.getMilliseconds(), "Milliseconds are different");
 					//traceAttributes(newIslamicDate);
 
-					newIslamicDate = g11n4js.calendars.islamic.add(dateIslamic, "millisecond",  12022);
-					newDate = dojo.date.add(date2, "millisecond",  12022);
+					newIslamicDate = islamic.add(dateIslamic, "millisecond",  12022);
+					newDate = gregorian.add(date2, "millisecond",  12022);
 					t.is(newIslamicDate.getHours(), newDate.getHours(), "Hours are different");
 					t.is(newIslamicDate.getMinutes(), newDate.getMinutes(), "Minutes are different");
 					t.is(newIslamicDate.getSeconds(), newDate.getSeconds(), "Seconds are different");
 					t.is(newIslamicDate.getMilliseconds(), newDate.getMilliseconds(), "Milliseconds are different");
 					//traceAttributes(newIslamicDate);
 
-					newIslamicDate = g11n4js.calendars.islamic.add(dateIslamic, "millisecond",  120422);
-					newDate = dojo.date.add(date2, "millisecond",  120422);
+					newIslamicDate = islamic.add(dateIslamic, "millisecond",  120422);
+					newDate = gregorian.add(date2, "millisecond",  120422);
 					t.is(newIslamicDate.getHours(), newDate.getHours(), "Hours are different");
 					t.is(newIslamicDate.getMinutes(), newDate.getMinutes(), "Minutes are different");
 					t.is(newIslamicDate.getSeconds(), newDate.getSeconds(), "Seconds are different");
 					t.is(newIslamicDate.getMilliseconds(), newDate.getMilliseconds(), "Milliseconds are different");
 					//traceAttributes(newIslamicDate);
 
-					newIslamicDate = g11n4js.calendars.islamic.add(dateIslamic, "millisecond",  1204422);
-					newDate = dojo.date.add(date2, "millisecond",  1204422);
+					newIslamicDate = islamic.add(dateIslamic, "millisecond",  1204422);
+					newDate = gregorian.add(date2, "millisecond",  1204422);
 					t.is(newIslamicDate.getHours(), newDate.getHours(), "Hours are different");
 					t.is(newIslamicDate.getMinutes(), newDate.getMinutes(), "Minutes are different");
 					t.is(newIslamicDate.getSeconds(), newDate.getSeconds(), "Seconds are different");
@@ -2110,3 +2108,4 @@ tests.register("g11n4js.calendars.tests.islamic.Date",
 		}
 	]
 );
+	});
