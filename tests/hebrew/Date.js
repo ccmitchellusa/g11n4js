@@ -1,11 +1,8 @@
 
-define(["doh", "dojo/_base/array", "g11n4js/calendars/gregorian",
+define(["doh", "dojo/_base/array", "dojo/i18n", "g11n4js/calendars/gregorian",
 	"g11n4js/calendars/hebrew","g11n4js/calendars/hebrew/Date",
 	"g11n4js/calendars/hebrew/locale", "g11n4js/calendars/hebrew/numerals", "dojo/date/locale"],
-	function(doh, arr, gregorian, hebrew, hDate, hLocale, numerals, locale){
-
-dojo.requireLocalization("dojo.cldr", "gregorian");
-dojo.requireLocalization("dojo.cldr", "hebrew");
+	function(doh, arr, i18n, gregorian, hebrew, hDate, hLocale, numerals, locale){
 
 doh.register("g11n4js.calendars.tests.hebrew.Date",
 	[
@@ -16,9 +13,9 @@ doh.register("g11n4js.calendars.tests.hebrew.Date",
 			setUp: function(){
 				var partLocaleList = ["he", "en"];
 
-				dojo.forEach(partLocaleList, function(locale){
-					dojo.requireLocalization("dojo.cldr", "gregorian", locale);
-					dojo.requireLocalization("dojo.cldr", "hebrew", locale);
+				arr.forEach(partLocaleList, function(locale){
+					i18n.getLocalization("dojo/cldr", "gregorian", locale);
+					i18n.getLocalization("dojo/cldr", "hebrew", locale);
 				});
 			},
 			runTest: function(t){

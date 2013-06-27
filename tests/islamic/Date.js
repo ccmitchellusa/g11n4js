@@ -1,10 +1,7 @@
-define(["doh", "dojo/_base/array", "g11n4js/calendars/gregorian",
+define(["doh", "dojo/_base/array", "dojo/i18n", "g11n4js/calendars/gregorian",
 	"g11n4js/calendars/islamic","g11n4js/calendars/islamic/Date",
 	"g11n4js/calendars/islamic/locale", "dojo/date/locale"],
-	function(doh, arr, gregorian, islamic, iDate, iLocale, locale){
-
-		dojo.requireLocalization("dojo.cldr", "gregorian");
-dojo.requireLocalization("dojo.cldr", "islamic");
+	function(doh, arr, i18n, gregorian, islamic, iDate, iLocale, locale){
 
 doh.register("g11n4js.calendars.tests.islamic.Date",
 	[
@@ -18,7 +15,7 @@ doh.register("g11n4js.calendars.tests.islamic.Date",
 				var partLocaleList = ["ar","en"];
 
 				arr.forEach(partLocaleList, function(locale) {
-					dojo.requireLocalization("dojo.cldr", "islamic", locale);
+					i18n.getLocalization("dojo/cldr", "islamic", locale);
 				});
 			},
 			runTest: function(t) {
@@ -2035,7 +2032,7 @@ doh.register("g11n4js.calendars.tests.islamic.Date",
 				options = { timePattern: pattern, selector: 'time' };
 				str = iLocale.format(dateIslamic, options);
 				dateIslamic1 = iLocale.parse(str, options);
-				var gregDate = gregorian.locale.parse(str, options);
+				var gregDate = locale.parse(str, options);
 				t.is(0, gregorian.compare(gregDate, dateIslamic1.toGregorian(), 'time'));
 
 				pattern = "h:m:s";

@@ -18,6 +18,9 @@ define(["dojo/_base/lang", "dojo/_base/array", "../gregorian", "dojo/i18n",
 			var widthList = ["abbr", "wide", "narrow"];
 			
 			switch(c){
+				case 'G':
+					s = bundle[(l < 4) ? "eraAbbr" : "eraNames"][0];
+				break;
 				case 'y':
 					if(locale.match(/^he(?:-.+)?$/)){
 						s = numerals.getYearHebrewLetters(dateObject.getFullYear());

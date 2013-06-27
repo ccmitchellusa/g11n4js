@@ -1,10 +1,7 @@
-define(["doh", "dojo/_base/array", "g11n4js/calendars/gregorian",
+define(["doh", "dojo/_base/array", "dojo/i18n", "g11n4js/calendars/gregorian",
 	"g11n4js/calendars/umalqura","g11n4js/calendars/umalqura/Date",
 	"g11n4js/calendars/umalqura/locale", "dojo/date/locale"],
-	function(doh, arr, gregorian, umalqura, iDate, iLocale, locale){
-
-		dojo.requireLocalization("dojo.cldr", "gregorian");
-dojo.requireLocalization("dojo.cldr", "islamic");
+	function(doh, arr, i18n, gregorian, umalqura, iDate, iLocale, locale){
 
 tests.register("g11n4js.calendars.tests.umalqura.Date",
 	[
@@ -18,7 +15,7 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        var partLocaleList = ["ar", "en"];
 
 		        arr.forEach(partLocaleList, function (locale) {
-		            dojo.requireLocalization("dojo.cldr", "islamic", locale);
+					i18n.getLocalization("dojo/cldr", "islamic", locale);
 		        });
 		    },
 		    runTest: function (t) {
@@ -171,7 +168,7 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 
 		            dates = [
                                 [1400, 0, 1, 1979, 10, 20],
-                                [1400, 0, 2, 1979, 10, 21],
+                                [1400, 0, 2, 1979, 10, 21]
 		            ];
 		            arr.forEach(dates, function (d, i) {
 		                idate1 = new iDate(d[0], d[1], d[2]);
@@ -1220,7 +1217,6 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 
 		            var dateIslamic = new iDate();
 		            var dateGregorian = new Date(gYear, gMonth, gDay);
-		            var iDate, gDate;
 		            dateIslamic.fromGregorian(dateGregorian);
 		            var inputDate = new iDate(hYear, hMonth, hDay);
 
@@ -2293,8 +2289,7 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 				           [1479, 11, 0, 2057, 5, 3],
 				           [1480, 0, 1, 2057, 6, 3]
 		        ];
-		        var iDate;
-		        var iDate2;
+		        var uDate, iDate2;
 		        var diffDay, diffMonth, diffYear;
 		        diffDay = 0;
 		        diffMonth = 0;
@@ -2701,7 +2696,7 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        options = { timePattern: pattern, selector: 'time' };
 		        str = iLocale.format(dateIslamic, options);
 		        dateIslamic1 = iLocale.parse(str, options);
-		        var gregDate = gregorian.locale.parse(str, options);
+		        var gregDate = locale.parse(str, options);
 		        t.is(0, gregorian.compare(gregDate, dateIslamic1.toGregorian(), 'time'));
 
 		        pattern = "h:m:s";
@@ -2709,7 +2704,7 @@ tests.register("g11n4js.calendars.tests.umalqura.Date",
 		        str = iLocale.format(dateIslamic, options);
 		        t.is(str, "3:3:59");
 		    }
-		},
+		}
 	]
 );
 	});

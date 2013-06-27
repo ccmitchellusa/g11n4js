@@ -1,7 +1,7 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "../gregorian"],
- function(lang, declare, gregorian){
+define(["dojo/_base/lang", "dojo/_base/declare", "../gregorian", "../islamic/Date"],
+ function(lang, declare, gregorian, IDate){
 
-	var IDate = declare(null, {
+	var UDate = declare(null, {
 	
 	// summary:
 	//		The component defines the UmAlqura (Hijri) Calendar Object according to Umalqura calculations
@@ -445,7 +445,7 @@ define(["dojo/_base/lang", "dojo/_base/declare", "../gregorian"],
         }
 
         else{
-            var islamicDate = new dojox.date.islamic.Date(this._year, this._month, this._date, this._hours, this._minutes, this._seconds, this._milliseconds);
+            var islamicDate = new IDate(this._year, this._month, this._date, this._hours, this._minutes, this._seconds, this._milliseconds);
             gdate = new Date(islamicDate.toGregorian());
         }
         return gdate;
@@ -633,7 +633,7 @@ define(["dojo/_base/lang", "dojo/_base/declare", "../gregorian"],
         else{
         	
 			
-            var islamicDate = new dojox.date.islamic.Date(date);
+            var islamicDate = new IDate(date);
             this._date = islamicDate.getDate();
             this._month = islamicDate.getMonth();
             this._year = islamicDate.getFullYear();
@@ -689,7 +689,7 @@ define(["dojo/_base/lang", "dojo/_base/declare", "../gregorian"],
                 length = 30;
             else length = 29;
         }else{
-            var islamicDate = new dojox.date.islamic.Date();
+            var islamicDate = new IDate();
             length = islamicDate.getDaysInIslamicMonth(month, year);
         }
         return length;
@@ -697,10 +697,10 @@ define(["dojo/_base/lang", "dojo/_base/declare", "../gregorian"],
 });
 
 //TODOC
-IDate.getDaysInIslamicMonth = function(/*dojox.date.umalqura.Date*/month){
-	return new IDate().getDaysInIslamicMonth(month.getMonth(),month.getFullYear()); // dojox.date.islamic.Date
+UDate.getDaysInIslamicMonth = function(/*dojox.date.umalqura.Date*/month){
+	return new UDate().getDaysInIslamicMonth(month.getMonth(),month.getFullYear()); // dojox.date.islamic.Date
 };
 
-return IDate;
+return UDate;
 });
 
