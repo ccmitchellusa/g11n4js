@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "./gregorian", "./islamic/Date"], function(lang, gregorian, IDate){
+define(["./gregorian", "./islamic/Date"], function(gregorian, IDate){
 
 	var islamic = {
 		// summary:
