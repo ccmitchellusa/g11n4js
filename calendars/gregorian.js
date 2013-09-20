@@ -1,4 +1,4 @@
-define(["dojo/has", "dojo/_base/lang"], function(has, lang){
+define(["dojo/has"], function(has){
 
 	var gregorian = {
 		// summary:
